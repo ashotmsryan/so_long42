@@ -1,6 +1,6 @@
-It’s time for you to create a basic computer graphics project!
+It's my first graphical project(2D minigame) by C,
 
-so long will help you improve your skills in the following areas: window management,
+so long improved my skills in the following areas: window management,
 event handling, colors, textures, and so forth.
 
 Here I used the school graphical library: the MiniLibX! This library was
