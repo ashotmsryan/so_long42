@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-#include <string.h>
+#include "../so_long.h"
 
 char	*mywhile(int fd, long readsize, char *sline)
 {

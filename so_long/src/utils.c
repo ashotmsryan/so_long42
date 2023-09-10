@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-t_data	del_nl(t_data *tab)
+void	del_nl(t_data *tab)
 {
 	int	i;
 	int	j;
@@ -29,67 +29,65 @@ t_data	del_nl(t_data *tab)
 		}
 		i++;
 	}
-	return (*tab);
 }
 
-void	check_rec(t_data *tab)
-{
-	int		i;
-	int		j;
-	size_t	size;
-
-	i = 0;
-	j = 0;
-	size = 0;
-	size = ft_strlen(tab->map[i]);
-	while (tab->map[i] != NULL)
-	{
-		if (size != ft_strlen(tab->map[i]))
-			ft_print_error(6);
-		i++;
-	}
-}
-
-void	finish(t_data *event)
-{
-	int	i;
-
-	i = 0;
-	while (event->map[i])
-	{
-		free(event->map[i]);
-		i++;
-	}
-	free (event->map);
-	mlx_destroy_image(event->mlx, event->img1);
-	mlx_destroy_image(event->mlx, event->img0);
-	mlx_destroy_image(event->mlx, event->imgc);
-	mlx_destroy_image(event->mlx, event->imgp);
-	mlx_destroy_image(event->mlx, event->imge);
-	write(1, "|-------------------------------------|\n", 40);
-	write(1, "|YOU SUCCESSFULLY PASSED THE GAME(^_^)|\n", 40);
-	write(1, "|-------------------------------------|\n", 40);
-	exit(0);
-}
-
-int	len_map_size(t_data *map)
+void	check_nl(t_data *data, char *str)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (map->map[i][j] != '\0')
-		j++;
-	return (j);
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n' && str[i + 1] == '\n')
+			j = 1;
+		i++;
+	}
+	if (j == 1)
+	{
+		free(str);
+		clean_and_exit(data, 1, "Empty nl error\n");
+	}
 }
 
-int	hight_map_size(t_data *map)
+void	duplicate(char ***dup, char **map)
+{
+	int	i;
+
+	*dup = (char**) malloc((hight_map_size(map) + 1) * sizeof(char *));
+	i = -1;
+	while(map && map[++i])
+		(*dup)[i] = ft_strdup(map[i]);
+	(*dup)[i] = NULL;
+}
+
+void	cl_count(t_data *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	map->score = 0;
+	while (map->map[i] != NULL)
+	{
+		j = 0;
+		while (map->map[i][j] != '\0')
+		{
+			if (map->map[i][j] == 'C')
+				map->score++;
+			j++;
+		}
+		i++;
+	}
+}
+
+int	hight_map_size(char **map)
 {
 	int	i;
 
 	i = 0;
-	while (map->map[i] != NULL)
+	while (map && map[i] != NULL)
 		i++;
 	return (i);
 }

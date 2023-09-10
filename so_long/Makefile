@@ -2,33 +2,34 @@ NAME = so_long
 
 CC = cc
 
-INCS = -I.
+CFLAGS = -Wall -Wextra -Werror -Imlx# -g3 -fsanitize=address
 
-CFLAGS = -Wall -Wextra -Werror -Imlx $(INCS)
+SRCS = $(wildcard src/*.c)
 
-SRCS = $(wildcard *.c)
+OBJFILE = objs
 
-OBJS = $(patsubst %.c, %.o, $(SRCS))
+OBJS = $(patsubst src/%.c, $(OBJFILE)/%.o, $(SRCS))
 
-RM = rm -f
+RM = rm -rf
 
-AR = ar rcs
+MD = mkdir -p
 
-%.o: %.c
+all: $(OBJFILE) $(NAME)
+
+$(OBJFILE) :
+	$(MD) $(OBJFILE)
+
+$(OBJFILE)/%.o : src/%.c Makefile so_long.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(OBJS) Makefile
+	$(CC) $(OBJS) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJFILE)
 
 fclean: clean
 	$(RM) $(NAME)
-
-bonus: $(NAME)
 
 re: fclean all
 

@@ -20,53 +20,74 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-typedef struct s_data
+typedef struct s_img //struct for images
 {
-	int		s;
-	char	**map;
-	char	*img_wl;
-	char	*img_g;
-	char	*img_c;
-	char	*img_p;
-	char	*img_e;
-	void	*mlx;
 	void	*img1;
 	void	*img0;
 	void	*imgc;
 	void	*imgp;
 	void	*imge;
-	void	*ptr_img;
-	void	*wid;
+	
 	int		img_l;
 	int		img_w;
+}			t_img;
+
+typedef struct s_data //struct for general variabls 
+{
+	char	*buff;
+	char	**map;
+	void	*mlx;
+	void	*wid;
 	int		score;
 	int		point_x;
 	int		point_y;
+	int		s;
+	t_img	*img;
 }			t_data;
 
-int		index_check(t_data *map);
-int		len_map_size(t_data *map);
-int		hight_map_size(t_data *map);
-int		ft_print_error(int err_nbr);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	**ft_map_checking(t_data *map, char *s, int fd);
-size_t	ft_strlen(char *str);
-void	ft_putnbr(int nb);
-void	check_nl(char *str);
-void	check_quantity_ep(t_data *map);
+//###################### MLX + PLEY ##############################
 void	finish(t_data *event);
 void	movement(int key, t_data *evn);
 void	key_event(t_data *img);
-void	check_strange_symbole(t_data *str);
-void	check_rec(t_data *tab);
 void	image_upload(t_data *img);
-void	window_manage(int len, int hight, t_data *map);
-t_data	del_nl(t_data *tab);
+void	open_wd(t_data *data);
+void	window_manage(int len, int hight, t_data *data);
+//################################################################
+
+//################# CHECKING #####################################
+int		index_check(t_data *map);
+void	ft_map_checking(t_data *map);
+void	check_nl(t_data *data,char *str);
+void	check_strange_symbole(t_data *str);
+void	check_quantity_ep(t_data *map);
+void	check_rec(t_data *tab);
+//################################################################
+
+//################# UTILS + FREE-INIT ############################
+int		len_map_size(t_data *map);
+void	cl_count(t_data *map);
+int		hight_map_size(char **map);
+void	del_nl(t_data *tab);
+void	clean_and_exit(t_data *data, int flag, char *err);
+void	init_all(t_data *data);
+void	ft_map_getting(t_data *map, char *s, int fd);
+void	free_double(char ***map);
+void	duplicate(char ***dup, char **map);
+//################################################################
+
+//################## FT_LIB ######################################
+size_t	ft_strlen(char *str);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, unsigned int start, size_t l);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(char *s);
 char	**ft_split(char const *s, char c);
+void	ft_putnbr(int nb);
+void	fill(char **str, int x, int y, char to_fill);
+void	valid_flood_fill_map(char **map, t_data *data);
+
+//################################################################
 
 #endif
