@@ -27,7 +27,10 @@ typedef struct s_img //struct for images
 	void	*imgc;
 	void	*imgp;
 	void	*imge;
-	
+	void	**nav;
+	void	**nav_m;
+	void	**nav_f;
+
 	int		img_l;
 	int		img_w;
 }			t_img;
@@ -38,12 +41,12 @@ typedef struct s_data //struct for general variabls
 	char	**map;
 	void	*mlx;
 	void	*wid;
-	void	**nav;
 
 	int		score;
 	int		point_x;
 	int		point_y;
 	int		s;
+	int		n; // 0-3 are P's inactive imgs | 4-7 are P's movement imgs | 8-11 are P's fire imgs 
 	t_img	*img;
 }			t_data;
 
@@ -51,8 +54,8 @@ typedef struct s_data //struct for general variabls
 void	finish(t_data *event);
 void	movement(int key, t_data *evn);
 void	key_event(t_data *img);
-void	image_upload(t_data *img, int n);
-void	open_wd(t_data *data);
+void	image_upload(t_data *img);
+void	get_img(t_data *data);
 void	window_manage(int len, int hight, t_data *data);
 //################################################################
 

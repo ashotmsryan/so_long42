@@ -12,36 +12,6 @@
 
 #include "../so_long.h"
 
-void	get_img(t_data *data)
-{
-	data->nav = (void**)malloc(5 * sizeof(void*));
-	if (!data->nav)
-		clean_and_exit(data, 1, "Fatal error\n");
-	data->nav[0] = mlx_xpm_file_to_image(data->mlx, "resources/pn.xpm", \
-		&data->img->img_w, &data->img->img_l);
-	data->nav[1] = mlx_xpm_file_to_image(data->mlx, "resources/pw.xpm", \
-		&data->img->img_w, &data->img->img_l);
-	data->nav[2] = mlx_xpm_file_to_image(data->mlx, "resources/ps.xpm", \
-		&data->img->img_w, &data->img->img_l);
-	data->nav[3] = mlx_xpm_file_to_image(data->mlx, "resources/pe.xpm", \
-		&data->img->img_w, &data->img->img_l);
-	data->nav[4] = 0;
-
-	data->img->img1 = mlx_xpm_file_to_image(data->mlx, "resources/wall.xpm", \
-		&data->img->img_w, &data->img->img_l);
-	data->img->img0 = mlx_xpm_file_to_image(data->mlx, "resources/ground1.xpm", \
-		&data->img->img_w, &data->img->img_l);
-	data->img->imgc = mlx_xpm_file_to_image(data->mlx, "resources/c.xpm", \
-		&data->img->img_w, &data->img->img_l);
-	// data->img->imgp = mlx_xpm_file_to_image(data->mlx, "resources/pn.xpm", \
-	// 	&data->img->img_w, &data->img->img_l);
-	data->img->imge = mlx_xpm_file_to_image(data->mlx, "resources/e1.xpm", \
-		&data->img->img_w, &data->img->img_l);
-	if (!data->nav[0] || !data->nav[1] || !data->nav[2] || !data->nav[3]
-		|| !data->img->img1 || !data->img->img0 || !data->img->imgc || !data->img->imge)
-		clean_and_exit(data, 1, "Resource error\n");
-}
-
 void	window_manage(int len, int hight, t_data *data)
 {
 	int		x;
@@ -52,7 +22,7 @@ void	window_manage(int len, int hight, t_data *data)
 	x = len * data->img->img_l;
 	y = hight * data->img->img_w;
 	data->wid = mlx_new_window(data->mlx, x, y, "so_long");
-	image_upload(data, 0);
+	image_upload(data);
 	key_event(data);
 	mlx_loop(data->mlx);
 }

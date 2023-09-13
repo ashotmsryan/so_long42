@@ -9,10 +9,13 @@ void init_all(t_data *data)
 	data->point_x = 0;
 	data->point_y = 0;
 	data->map = 0;
-	data->nav = 0;
+	data->n = 0;
 	data->img = malloc(sizeof(t_img));
 	if (!data->img)
 		clean_and_exit(data, 1, "Fatal error\n");
+	data->img->nav = 0;
+	data->img->nav_m = 0;
+	data->img->nav_f = 0;
 	data->img->img1 = 0;
 	data->img->img0 = 0;
 	data->img->imgc = 0;
@@ -36,8 +39,6 @@ void	free_double(char ***map)
 
 void	clean_and_exit(t_data *data, int flag, char *err)
 {
-	if (data->img->imgp)
-    	mlx_destroy_image(data->mlx, data->img->imgp);
     if (data->img->img1)
     	mlx_destroy_image(data->mlx, data->img->img1);
     if (data->img->img0)
@@ -46,15 +47,37 @@ void	clean_and_exit(t_data *data, int flag, char *err)
    		mlx_destroy_image(data->mlx, data->img->imgc);
     if (data->img->imge)
     	mlx_destroy_image(data->mlx, data->img->imge);
-	if (data->nav && data->nav[0])
-    	mlx_destroy_image(data->mlx, data->nav[0]);
-	if (data->nav && data->nav[1])
-    	mlx_destroy_image(data->mlx, data->nav[1]);
-	if (data->nav && data->nav[2])
-	    mlx_destroy_image(data->mlx, data->nav[2]);
-	if (data->nav && data->nav[3])
-    	mlx_destroy_image(data->mlx, data->nav[3]);
-	free(data->nav);
+
+	if (data->img->nav && data->img->nav[0])
+    	mlx_destroy_image(data->mlx, data->img->nav[0]);
+	if (data->img->nav && data->img->nav[1])
+    	mlx_destroy_image(data->mlx, data->img->nav[1]);
+	if (data->img->nav && data->img->nav[2])
+	    mlx_destroy_image(data->mlx, data->img->nav[2]);
+	if (data->img->nav && data->img->nav[3])
+    	mlx_destroy_image(data->mlx, data->img->nav[3]);
+	
+	if (data->img->nav_m && data->img->nav_m[0])
+    	mlx_destroy_image(data->mlx, data->img->nav_m[0]);
+	if (data->img->nav_m && data->img->nav_m[1])
+    	mlx_destroy_image(data->mlx, data->img->nav_m[1]);
+	if (data->img->nav_m && data->img->nav_m[2])
+	    mlx_destroy_image(data->mlx, data->img->nav_m[2]);
+	if (data->img->nav_m && data->img->nav_m[3])
+    	mlx_destroy_image(data->mlx, data->img->nav_m[3]);
+
+	if (data->img->nav_f && data->img->nav_f[0])
+    	mlx_destroy_image(data->mlx, data->img->nav_f[0]);
+	if (data->img->nav_f && data->img->nav_f[1])
+    	mlx_destroy_image(data->mlx, data->img->nav_f[1]);
+	if (data->img->nav_f && data->img->nav_f[2])
+	    mlx_destroy_image(data->mlx, data->img->nav_f[2]);
+	if (data->img->nav_f && data->img->nav_f[3])
+    	mlx_destroy_image(data->mlx, data->img->nav_f[3]);
+
+	free(data->img->nav);
+	free(data->img->nav_m);
+	free(data->img->nav_f);
 	free(data->img);
 	free(data->wid);
 	free_double(&(data->map));
