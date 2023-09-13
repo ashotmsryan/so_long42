@@ -38,6 +38,8 @@ typedef struct s_data //struct for general variabls
 	char	**map;
 	void	*mlx;
 	void	*wid;
+	void	**nav;
+
 	int		score;
 	int		point_x;
 	int		point_y;
@@ -49,7 +51,7 @@ typedef struct s_data //struct for general variabls
 void	finish(t_data *event);
 void	movement(int key, t_data *evn);
 void	key_event(t_data *img);
-void	image_upload(t_data *img);
+void	image_upload(t_data *img, int n);
 void	open_wd(t_data *data);
 void	window_manage(int len, int hight, t_data *data);
 //################################################################

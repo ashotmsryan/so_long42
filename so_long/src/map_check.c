@@ -41,38 +41,6 @@ void	checking_ecp(t_data *data)
 		clean_and_exit(data, 1, "Special symbole error\n");
 }
 
-void	ft_map_getting(t_data *data, char *s, int fd)
-{
-	char	*smap;
-	char	*str;
-
-	str = NULL;
-	if (ft_strncmp(".ber", s + ft_strlen(s) - 4, 4) != 0)
-		clean_and_exit(data, 1, "Wrong file type\n");
-	while (1)
-	{
-		smap = get_next_line(fd);
-		if (!str)
-			str = ft_strdup(smap);
-		else
-			str = ft_strjoin(str, smap);
-		if (str[0] == '\0' || str[0] != '1')
-		{
-			free(str);
-			free(smap);
-			clean_and_exit(data, 1, "Invalid map\n");
-		}
-		if (*smap == '\0')
-			break ;
-		free(smap);
-	}
-	check_nl(data, str);
-	data->map = ft_split(str, '\n');
-	free (str);
-	free(smap);
-
-}
-
 void	check_strange_symbole(t_data *data)
 {
 	int	i;

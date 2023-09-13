@@ -124,9 +124,11 @@ void	movement(int key, t_data *data)
 {
 	int	i;
 	int	j;
+	int	n;
 
 	i = 0;
 	j = 0;
+	n = 0;
 	while (data->map[i][j] != 'P' && data->map[i][j] != 'F')
 	{
 		i++;
@@ -136,14 +138,30 @@ void	movement(int key, t_data *data)
 			j++;
 	}
 	if (key == 13 || key == 126)
-		going_up(data, i, j);
+	{
+		n = 0;
+		if (key == 13)
+			going_up(data, i, j);
+	}
 	else if (key == 0 || key == 123)
-		going_left(data, i, j);
+	{
+		n = 1;
+		if (key == 0)
+			going_left(data, i, j);
+	}
 	else if (key == 1 || key == 125)
-		going_dawn(data, i, j);
+	{
+		n = 2;
+		if (key == 1)
+			going_dawn(data, i, j);
+	}
 	else if (key == 2 || key == 124)
-		going_right(data, i, j);
+	{
+		n = 3;
+		if (key == 2)
+			going_right(data, i, j);
+	}
 	data->point_x = 0;
 	data->point_y = 0;
-	image_upload(data);
+	image_upload(data, n);
 }
