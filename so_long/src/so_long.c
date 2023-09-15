@@ -21,6 +21,7 @@ void	window_manage(int len, int hight, t_data *data)
 	get_img(data);
 	x = len * data->img->img_l;
 	y = hight * data->img->img_w;
+	printf("%d\n%d\n", x,y);
 	data->wid = mlx_new_window(data->mlx, x, y, "so_long");
 	image_upload(data);
 	key_event(data);
@@ -69,6 +70,7 @@ int	main(int argc, char **argv)
 	init_all(&data);
 	if (argc == 2)
 	{
+	
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 			clean_and_exit(&data, 1, "Can not open file\n");

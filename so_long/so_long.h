@@ -20,13 +20,24 @@
 # include <fcntl.h>
 # include <unistd.h>
 
+typedef struct s_flag
+{
+	int		flag_fire;
+	int		flag_exit;
+	int		flag_enter;
+	int		flag_first_move;
+
+	int		initial_x;
+	int		initial_y;
+}			t_flag;
+
 typedef struct s_img //struct for images
 {
 	void	*img1;
 	void	*img0;
 	void	*imgc;
 	void	*imgp;
-	void	*imge;
+	void	**imge;
 	void	**nav;
 	void	**nav_m;
 	void	**nav_f;
@@ -43,20 +54,22 @@ typedef struct s_data //struct for general variabls
 	void	*wid;
 
 	int		score;
+	int		level;
 	int		point_x;
 	int		point_y;
 	int		s;
 	int		n; // 0-3 are P's inactive imgs | 4-7 are P's movement imgs | 8-11 are P's fire imgs 
 	t_img	*img;
+	t_flag	*flag;
 }			t_data;
 
 //###################### MLX + PLEY ##############################
 void	finish(t_data *event);
 void	movement(int key, t_data *evn);
 void	key_event(t_data *img);
-void	image_upload(t_data *img);
 void	get_img(t_data *data);
 void	window_manage(int len, int hight, t_data *data);
+int		image_upload(t_data *img);
 //################################################################
 
 //################# CHECKING #####################################

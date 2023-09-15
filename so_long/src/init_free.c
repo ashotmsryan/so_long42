@@ -9,6 +9,7 @@ void init_all(t_data *data)
 	data->point_x = 0;
 	data->point_y = 0;
 	data->map = 0;
+	data->level = 0;
 	data->n = 0;
 	data->img = malloc(sizeof(t_img));
 	if (!data->img)
@@ -23,6 +24,15 @@ void init_all(t_data *data)
 	data->img->imge = 0;
 	data->img->img_l = 0;
 	data->img->img_w = 0;
+	data->flag = malloc(sizeof(t_img));
+	if (!data->flag)
+		clean_and_exit(data, 1, "Fatal error\n");
+	data->flag->flag_fire = 0;
+	data->flag->flag_exit = 0;
+	data->flag->flag_enter = 0;
+	data->flag->initial_x = 0;
+	data->flag->initial_y = 0;
+	data->flag->flag_first_move = 0;
 }
 
 void	free_double(char ***map)
@@ -79,6 +89,7 @@ void	clean_and_exit(t_data *data, int flag, char *err)
 	free(data->img->nav_m);
 	free(data->img->nav_f);
 	free(data->img);
+	free(data->flag);
 	free(data->wid);
 	free_double(&(data->map));
 	write(2, err, ft_strlen(err));

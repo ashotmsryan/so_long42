@@ -17,6 +17,7 @@ void	going_up(t_data *data, int i, int j)
 	if (data->map[i - 1][j] != '1')
 	{
 		data->s++;
+		data->flag->flag_enter++;
 		printf("%d\n",data->s);
 		data->n = 4;
 		if (data->map[i - 1][j] == 'C')
@@ -45,6 +46,7 @@ void	going_left(t_data *data, int i, int j)
 	if (data->map[i][j - 1] != '1')
 	{
 		data->s++;
+		data->flag->flag_enter++;
 		data->n = 5;
         printf("%d\n",data->s);
 		if (data->map[i][j - 1] == 'C')
@@ -73,6 +75,7 @@ void	going_dawn(t_data *data, int i, int j)
 	if (data->map[i + 1][j] != '1')
 	{
 		data->s++;
+		data->flag->flag_enter++;
 		data->n = 6;
 		printf("%d\n",data->s);
 		if (data->map[i + 1][j] == 'C')
@@ -101,6 +104,7 @@ void	going_right(t_data *data, int i, int j)
 	if (data->map[i][j + 1] != '1')
 	{
 		data->s++;
+		data->flag->flag_enter++;
 		data->n = 7;
 		printf("%d\n",data->s);
 		if (data->map[i][j + 1] == 'C')
@@ -163,6 +167,4 @@ void	movement(int key, t_data *data)
 		if (key == 2)
 			going_right(data, i, j);
 	}
-	data->point_x = 0;
-	data->point_y = 0;
 }

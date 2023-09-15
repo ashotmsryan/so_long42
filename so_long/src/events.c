@@ -43,7 +43,6 @@ int	pressing_key(int key, t_data *data)
 {
     char buff[] = "|--------------------------|\n|YOU EXITED SUCCESSFULLY!!!|\n|--------------------------|\n"; 
 
-	printf("key = %d\n", key);
 	if (key == 53)
 		clean_and_exit(data, 0, buff);
 	else if (key == 13 || key == 1 || key == 0 || key == 2
@@ -51,7 +50,6 @@ int	pressing_key(int key, t_data *data)
 		movement(key, data);
 	else if (key == 49)
 		fire(data);
-	image_upload(data);
 	return (0);
 }
 
@@ -64,7 +62,7 @@ int	exit_game(t_data *data)
 
 void	key_event(t_data *data)
 {
-
+	mlx_loop_hook(data->mlx, image_upload, data);
 	mlx_hook (data->wid, 2, 1l << 2, pressing_key, data);
 	mlx_hook (data->wid, 17, 1l << 17, exit_game, data);
 }
