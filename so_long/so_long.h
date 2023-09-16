@@ -23,9 +23,9 @@
 typedef struct s_flag
 {
 	int		flag_fire;
-	int		flag_exit;
-	int		flag_enter;
-	int		flag_first_move;
+	int		flag_exit; // for exit loop
+	int		flag_enter; //for initial portal
+	int		flag_first_move; // for first move place
 
 	int		initial_x;
 	int		initial_y;
@@ -53,8 +53,10 @@ typedef struct s_data //struct for general variabls
 	void	*mlx;
 	void	*wid;
 
-	int		score;
 	int		level;
+	int		argc;
+
+	int		score;
 	int		point_x;
 	int		point_y;
 	int		s;

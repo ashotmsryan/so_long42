@@ -44,7 +44,7 @@ int	pressing_key(int key, t_data *data)
     char buff[] = "|--------------------------|\n|YOU EXITED SUCCESSFULLY!!!|\n|--------------------------|\n"; 
 
 	if (key == 53)
-		clean_and_exit(data, 0, buff);
+		clean_and_exit(data, 2, buff);
 	else if (key == 13 || key == 1 || key == 0 || key == 2
 		|| key == 126 || key == 125 || key == 123 || key == 124)
 		movement(key, data);
@@ -56,7 +56,7 @@ int	pressing_key(int key, t_data *data)
 int	exit_game(t_data *data)
 {
     char buff[] = "|--------------------------|\n|YOU EXITED SUCCESSFULLY!!!|\n|--------------------------|\n"; 
-    clean_and_exit(data, 0, buff);
+    clean_and_exit(data, 2, buff);
     return (0);
 }
 

@@ -20,8 +20,6 @@ void	get_img(t_data *data)
 		&data->img->img_w, &data->img->img_l);
 	data->img->imgc = mlx_xpm_file_to_image(data->mlx, "resources/c.xpm", \
 		&data->img->img_w, &data->img->img_l);
-	data->img->imge = mlx_xpm_file_to_image(data->mlx, "resources/e1.xpm", \
-		&data->img->img_w, &data->img->img_l);
 
 	data->img->nav = (void**)malloc(4 * sizeof(void*));
 	if (!data->img->nav)

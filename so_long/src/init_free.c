@@ -10,6 +10,7 @@ void init_all(t_data *data)
 	data->point_y = 0;
 	data->map = 0;
 	data->level = 0;
+	data->argc = 0;
 	data->n = 0;
 	data->img = malloc(sizeof(t_img));
 	if (!data->img)
@@ -49,14 +50,23 @@ void	free_double(char ***map)
 
 void	clean_and_exit(t_data *data, int flag, char *err)
 {
+	if (flag)
+		write(2, err, ft_strlen(err));
     if (data->img->img1)
     	mlx_destroy_image(data->mlx, data->img->img1);
     if (data->img->img0)
     	mlx_destroy_image(data->mlx, data->img->img0);
     if (data->img->imgc)
    		mlx_destroy_image(data->mlx, data->img->imgc);
-    if (data->img->imge)
-    	mlx_destroy_image(data->mlx, data->img->imge);
+
+    if (data->img->imge[0])
+    	mlx_destroy_image(data->mlx, data->img->imge[0]);
+	if (data->img->imge[1])
+    	mlx_destroy_image(data->mlx, data->img->imge[1]);
+    if (data->img->imge[2])
+    	mlx_destroy_image(data->mlx, data->img->imge[2]);
+	if (data->img->imge[3])
+    	mlx_destroy_image(data->mlx, data->img->imge[3]);	
 
 	if (data->img->nav && data->img->nav[0])
     	mlx_destroy_image(data->mlx, data->img->nav[0]);
@@ -88,12 +98,12 @@ void	clean_and_exit(t_data *data, int flag, char *err)
 	free(data->img->nav);
 	free(data->img->nav_m);
 	free(data->img->nav_f);
+	free(data->img->imge);
 	free(data->img);
 	free(data->flag);
 	free(data->wid);
 	free_double(&(data->map));
-	write(2, err, ft_strlen(err));
-	system("leaks so_long");
+		// system("leaks so_long");
 	if (flag)
 		exit(1);
 	exit(0);

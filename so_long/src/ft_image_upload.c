@@ -27,7 +27,7 @@ void	player_img_upload(t_data *data)
 	{
 		if (data->flag->flag_exit >= 4)
 			data->flag->flag_exit = 0;
-		if (data->flag->flag_first_move == 1)
+		if (data->flag->flag_first_move >= 1)
 			mlx_put_image_to_window(data->mlx, data->wid,
 				data->img->img0, data->flag->initial_x, data->flag->initial_y);
 		else
@@ -36,6 +36,7 @@ void	player_img_upload(t_data *data)
 		data->flag->flag_exit++;
 		data->flag->flag_first_move = 0;
 	}
+	
 	if (data->flag->flag_fire)
 	{
 		usleep(300000);

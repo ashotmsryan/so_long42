@@ -68,19 +68,23 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	init_all(&data);
-	if (argc == 2)
+	data.argc = argc - 1;
+	if (argc > 1)
 	{
-	
-		fd = open(argv[1], O_RDONLY);
-		if (fd == -1)
-			clean_and_exit(&data, 1, "Can not open file\n");
-		ft_map_getting(&data, argv[1], fd);
-		ft_map_checking(&data);
-		close(fd);
-		cl_count(&data);
-		len = ft_strlen(data.map[0]);
-		hight = hight_map_size(data.map);
-		window_manage(len, hight, &data);
+		while(data.level < argc - 1)
+		{
+			fd = open(argv[data.level + 1], O_RDONLY);
+			if (fd == -1)
+				clean_and_exit(&data, 1, "Can not open file\n");
+			ft_map_getting(&data, argv[data.level + 1], fd);
+			ft_map_checking(&data);
+			close(fd);
+			cl_count(&data);
+			len = ft_strlen(data.map[0]);
+			hight = hight_map_size(data.map);
+			window_manage(len, hight, &data);
+			data.level++;
+		}
 	}
 	else
 		clean_and_exit(&data, 1, "Wrong number of arguments\n");
