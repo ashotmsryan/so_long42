@@ -20,6 +20,23 @@ void	get_img(t_data *data)
 		&data->img->img_w, &data->img->img_l);
 	data->img->imgc = mlx_xpm_file_to_image(data->mlx, "resources/c.xpm", \
 		&data->img->img_w, &data->img->img_l);
+	data->img->imgc1 = mlx_xpm_file_to_image(data->mlx, "resources/c1.xpm", \
+		&data->img->img_w, &data->img->img_l);
+	data->img->midpic = mlx_xpm_file_to_image(data->mlx, "resources/midpic.xpm", \
+		&data->img->img_w, &data->img->img_l);
+	data->img->endpic = mlx_xpm_file_to_image(data->mlx, "resources/endpic.xpm", \
+		&data->img->img_w, &data->img->img_l);
+
+	data->img->start = mlx_xpm_file_to_image(data->mlx, "resources/start.xpm", \
+		&data->img->img_w, &data->img->img_l);
+	data->img->start1 = mlx_xpm_file_to_image(data->mlx, "resources/start1.xpm", \
+		&data->img->img_w, &data->img->img_l);
+	data->img->start2 = mlx_xpm_file_to_image(data->mlx, "resources/start2.xpm", \
+		&data->img->img_w, &data->img->img_l);
+	data->img->start3 = mlx_xpm_file_to_image(data->mlx, "resources/start3.xpm", \
+		&data->img->img_w, &data->img->img_l);
+	data->img->start4 = mlx_xpm_file_to_image(data->mlx, "resources/start4.xpm", \
+		&data->img->img_w, &data->img->img_l);
 
 	data->img->nav = (void**)malloc(4 * sizeof(void*));
 	if (!data->img->nav)
@@ -74,6 +91,7 @@ void	get_img(t_data *data)
         || !data->img->nav_m[0] || !data->img->nav_m[1] || !data->img->nav_m[2] || !data->img->nav_m[3]
         || !data->img->imge[0] || !data->img->imge[1] || !data->img->imge[2] || !data->img->imge[3]
         || !data->img->nav_f[0] || !data->img->nav_f[1] || !data->img->nav_f[2] || !data->img->nav_f[3]
-		|| !data->img->img1 || !data->img->img0 || !data->img->imgc || !data->img->imge)
-		clean_and_exit(data, 1, "Resource error\n");;
+		|| !data->img->img1 || !data->img->img0 || !data->img->imgc || !data->img->imge || !data->img->midpic || !data->img->endpic
+		|| !data->img->start || !data->img->start1 || !data->img->start2 || !data->img->start3 || !data->img->start4)
+		clean_and_exit(data, 1, "Resource error\n");
 }

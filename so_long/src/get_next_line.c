@@ -36,18 +36,18 @@ char	*get_next_line(int fd)
 {
 	long		index;
 	long		readsize;
-	static char	*sline;
+	static char	*sline[1024];
 	char		*line;
 	char		*tmp;
 
 	readsize = 1;
 	if (readsize == 0)
 		return (NULL);
-	sline = mywhile(fd, readsize, sline);
-	index = ft_strlen(sline) - ft_strlen(ft_strchr(sline, '\n')) + 1;
-	line = ft_substr(sline, 0, index);
-	tmp = sline;
-	sline = ft_substr(sline, index, ft_strlen(sline));
+	sline[fd] = mywhile(fd, readsize, sline[fd]);
+	index = ft_strlen(sline[fd]) - ft_strlen(ft_strchr(sline[fd], '\n')) + 1;
+	line = ft_substr(sline[fd], 0, index);
+	tmp = sline[fd];
+	sline[fd] = ft_substr(sline[fd], index, ft_strlen(sline[fd]));
 	free(tmp);
 	return (line);
 }

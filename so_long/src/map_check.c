@@ -90,12 +90,9 @@ void	check_borders(t_data *data)
 void	check_rec(t_data *data)
 {
 	int		i;
-	int		j;
 	size_t	size;
 
 	i = 0;
-	j = 0;
-	size = 0;
 	size = ft_strlen(data->map[i]);
 	while (data->map[i] != NULL)
 	{

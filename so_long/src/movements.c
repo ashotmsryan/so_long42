@@ -131,37 +131,40 @@ void	movement(int key, t_data *data)
 
 	i = 0;
 	j = 0;
-	while (data->map[i][j] != 'P' && data->map[i][j] != 'F')
+	if (data->flag->flag_start == 0)
 	{
-		i++;
-		j = 0;
-		while (data->map[i][j] != 'P' && data->map[i][j] != 'F'
-				&& data->map[i][j] != '\0')
-			j++;
-	}
-	data->flag->flag_enter++;
-	if (key == 13 || key == 126)
-	{
-		data->n = 0;
-		if (key == 13)
-			going_up(data, i, j);
-	}
-	else if (key == 0 || key == 123)
-	{
-		data->n = 1;
-		if (key == 0)
-			going_left(data, i, j);
-	}
-	else if (key == 1 || key == 125)
-	{
-		data->n = 2;
-		if (key == 1)
-			going_dawn(data, i, j);
-	}
-	else if (key == 2 || key == 124)
-	{
-		data->n = 3;
-		if (key == 2)
-			going_right(data, i, j);
+		while (data->map[i][j] != 'P' && data->map[i][j] != 'F')
+		{
+			i++;
+			j = 0;
+			while (data->map[i][j] != 'P' && data->map[i][j] != 'F'
+					&& data->map[i][j] != '\0')
+				j++;
+		}
+		data->flag->flag_enter++;
+		if (key == 13 || key == 126)
+		{
+			data->n = 0;
+			if (key == 13)
+				going_up(data, i, j);
+		}
+		else if (key == 0 || key == 123)
+		{
+			data->n = 1;
+			if (key == 0)
+				going_left(data, i, j);
+		}
+		else if (key == 1 || key == 125)
+		{
+			data->n = 2;
+			if (key == 1)
+				going_dawn(data, i, j);
+		}
+		else if (key == 2 || key == 124)
+		{
+			data->n = 3;
+			if (key == 2)
+				going_right(data, i, j);
+		}
 	}
 }

@@ -71,8 +71,14 @@ void	putting_img(t_data *data, int i, int j)
 		mlx_put_image_to_window(data->mlx, data->wid,
 			data->img->img1, data->point_x, data->point_y);
 	else if (data->map[i][j] == 'C')
-		mlx_put_image_to_window(data->mlx, data->wid,
-			data->img->imgc, data->point_x, data->point_y);
+	{
+		if (data->level % 2 == 0)
+			mlx_put_image_to_window(data->mlx, data->wid,
+				data->img->imgc, data->point_x, data->point_y);
+		else
+			mlx_put_image_to_window(data->mlx, data->wid,
+				data->img->imgc1, data->point_x, data->point_y);
+	}
 	else if (data->map[i][j] == 'E')
 	{
 		if (data->score == 0)
@@ -86,6 +92,24 @@ void	putting_img(t_data *data, int i, int j)
 	}
 }
 
+void	start_img_put(t_data *data)
+{
+	if (data->flag->flag_start == -2)
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->endpic, 0, 0);
+	else if (data->flag->flag_start == -1)
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->midpic, 0, 0);
+	else if (data->flag->flag_start == 5)
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->start, 0, 0);
+	else if(data->flag->flag_start == 4)
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->start1, 240, 100);
+	else if (data->flag->flag_start == 3)
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->start2, 240, 100);
+	else if (data->flag->flag_start == 2)
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->start3, 240, 100);
+	else if (data->flag->flag_start == 1)
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->start4, 400, 50);
+}
+
 int	image_upload(t_data *data)
 {
 	int	i;
@@ -94,18 +118,23 @@ int	image_upload(t_data *data)
 	i = 0;
 	data->point_x = 0;
 	data->point_y = 0;
-	while (data->map[i] != NULL)
+	if (data->flag->flag_start)
+		start_img_put(data);
+	else
 	{
-        j = 0;
-		while (data->map[i][j] != '\0')
+		while (data->map && data->map[i] != NULL)
 		{
-			putting_img(data, i, j);
-			j++;
-			data->point_x += data->img->img_l;
+			j = 0;
+			while (data->map[i][j] != '\0')
+			{
+				putting_img(data, i, j);
+				j++;
+				data->point_x += data->img->img_l;
+			}
+			data->point_x = 0;
+			data->point_y += data->img->img_w;
+			i++;
 		}
-		data->point_x = 0;
-		data->point_y += data->img->img_w;
-		i++;
 	}
 	return (0);
 }

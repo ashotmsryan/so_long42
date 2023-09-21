@@ -18,11 +18,14 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
+# include <pthread.h>
 # include <unistd.h>
 
 typedef struct s_flag
 {
+	int		flag_win;
 	int		flag_fire;
+	int		flag_start;
 	int		flag_exit; // for exit loop
 	int		flag_enter; //for initial portal
 	int		flag_first_move; // for first move place
@@ -33,10 +36,20 @@ typedef struct s_flag
 
 typedef struct s_img //struct for images
 {
+	void	*start;
+	void	*start1;
+	void	*start2;
+	void	*start3;
+	void	*start4;
+	void	*midpic;
+	void	*endpic;
+
 	void	*img1;
 	void	*img0;
 	void	*imgc;
+	void	*imgc1;
 	void	*imgp;
+
 	void	**imge;
 	void	**nav;
 	void	**nav_m;
@@ -48,13 +61,18 @@ typedef struct s_img //struct for images
 
 typedef struct s_data //struct for general variabls 
 {
+	pthread_t pid;
+
 	char	*buff;
 	char	**map;
 	void	*mlx;
 	void	*wid;
+	int		win_y;
+	int		win_x;
 
 	int		level;
 	int		argc;
+	char	**argv;
 
 	int		score;
 	int		point_x;
@@ -66,6 +84,7 @@ typedef struct s_data //struct for general variabls
 }			t_data;
 
 //###################### MLX + PLEY ##############################
+void	so_long(t_data *data, char *argv);
 void	finish(t_data *event);
 void	movement(int key, t_data *evn);
 void	key_event(t_data *img);

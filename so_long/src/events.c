@@ -20,11 +20,6 @@ void	finish(t_data *data)
 
 void	fire(t_data *data)
 {
-	int	i;
-	int	j;
-	
-	i = 0;
-	j = 0;
 	if (data->n >= 0 && data->n < 4)
 		data->n = data->n + 8;
 	else if(data->n >= 4 && data->n < 8)
@@ -43,6 +38,23 @@ int	pressing_key(int key, t_data *data)
 {
     char buff[] = "|--------------------------|\n|YOU EXITED SUCCESSFULLY!!!|\n|--------------------------|\n"; 
 
+	if (key == 36 && data->flag->flag_start)
+	{
+		if (data->flag->flag_start == -2 && data->level + 1 == data->argc)
+			clean_and_exit(data, 2, "You won!\n");
+		if (data->flag->flag_start == -1)
+			data->flag->flag_start = 0;
+		else
+			data->flag->flag_start--;
+		if (data->flag->flag_start == 0)
+		{
+			if (data->wid)
+				mlx_destroy_window(data->mlx, data->wid);
+			data->wid = 0;
+			so_long(data, data->argv[data->level + 1]);
+		}
+		mlx_clear_window(data->mlx, data->wid);
+	}
 	if (key == 53)
 		clean_and_exit(data, 2, buff);
 	else if (key == 13 || key == 1 || key == 0 || key == 2

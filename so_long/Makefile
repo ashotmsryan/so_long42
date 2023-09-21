@@ -2,7 +2,7 @@ NAME = so_long
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -ImlxLib # -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -ImlxLib  -g3 -fsanitize=address
 
 SRCS = $(wildcard src/*.c)
 
