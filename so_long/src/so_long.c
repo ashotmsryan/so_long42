@@ -72,10 +72,13 @@ void	so_long(t_data *data, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		clean_and_exit(data, 1, "Can not open file\n");
-	ft_map_getting(data, path, fd);
+	if (!data->map)
+	{
+		ft_map_getting(data, path, fd);
+		ft_map_checking(data);
+		cl_count(data);
+	}
 	close(fd);
-	ft_map_checking(data);
-	cl_count(data);
 	len = ft_strlen(data->map[0]);
 	hight = hight_map_size(data->map);
 	window_manage(len, hight, data);

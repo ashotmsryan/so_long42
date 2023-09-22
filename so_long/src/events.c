@@ -45,7 +45,14 @@ int	pressing_key(int key, t_data *data)
 		if (data->flag->flag_start == -1)
 			data->flag->flag_start = 0;
 		else
+		{
+			if (data->flag->flag_song == 3)
+			{
+				system("afplay ./resources/HansZimmer-CornfieldChase.mp3 & ");
+				data->flag->flag_song--;
+			}
 			data->flag->flag_start--;
+		}
 		if (data->flag->flag_start == 0)
 		{
 			if (data->wid)

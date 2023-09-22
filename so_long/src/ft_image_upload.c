@@ -95,7 +95,15 @@ void	putting_img(t_data *data, int i, int j)
 void	start_img_put(t_data *data)
 {
 	if (data->flag->flag_start == -2)
+	{
+		if (data->flag->flag_song == 1)
+		{
+			system("killall afplay");
+			system("afplay ./resources/Redbone-ComeAndGetYourLove.mp3 & ");
+			data->flag->flag_song--;
+		}
 		mlx_put_image_to_window(data->mlx, data->wid, data->img->endpic, 0, 0);
+	}
 	else if (data->flag->flag_start == -1)
 		mlx_put_image_to_window(data->mlx, data->wid, data->img->midpic, 0, 0);
 	else if (data->flag->flag_start == 5)
@@ -121,7 +129,13 @@ int	image_upload(t_data *data)
 	if (data->flag->flag_start)
 		start_img_put(data);
 	else
-	{
+	{	
+		if (data->flag->flag_song == 2)
+		{
+			system("killall afplay");
+			system("afplay ./resources/Цой-Кукушка.mp3 & ");
+			data->flag->flag_song--;
+		}
 		while (data->map && data->map[i] != NULL)
 		{
 			j = 0;

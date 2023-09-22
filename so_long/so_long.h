@@ -24,6 +24,7 @@
 typedef struct s_flag
 {
 	int		flag_win;
+	int		flag_song;
 	int		flag_fire;
 	int		flag_start;
 	int		flag_exit; // for exit loop
@@ -61,8 +62,6 @@ typedef struct s_img //struct for images
 
 typedef struct s_data //struct for general variabls 
 {
-	pthread_t pid;
-
 	char	*buff;
 	char	**map;
 	void	*mlx;

@@ -31,6 +31,7 @@ void init_all(t_data *data)
 	if (!data->flag)
 		clean_and_exit(data, 1, "Fatal error\n");
 	data->flag->flag_win = 0;
+	data->flag->flag_song = 3;
 	data->flag->flag_fire = 0;
 	data->flag->flag_exit = 0;
 	data->flag->flag_start = 5;
@@ -134,7 +135,7 @@ void	clean_and_exit(t_data *data, int flag, char *err) // 0 if passed game | 1 i
 		data->flag = 0;
 		free(data->wid);
 		data->wid = 0;
-
+		system("killall afplay");
 		if (flag == 1)
 			exit(1);
 		
@@ -143,10 +144,7 @@ void	clean_and_exit(t_data *data, int flag, char *err) // 0 if passed game | 1 i
 	mlx_destroy_window(data->mlx, data->wid);
 	data->wid = 0;
 	if (data->level + 1 == data->argc)
-	{
-		printf("aaaaaaaaaaaa\n");
 		data->flag->flag_start = -2;
-	}
 	else
 	{
 		data->level++;
