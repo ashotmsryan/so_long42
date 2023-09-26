@@ -28,6 +28,8 @@ void	going_up(t_data *data, int i, int j)
 		}
 		else if (data->map[i - 1][j] == 'E' && data->score == 0)
 			finish(data);
+		else if (data->map[i - 1][j] == 'B')
+			clean_and_exit(data, 3, "");
 		else
 		{
 			if ((data->map[i - 1][j] == '0' || data->map[i - 1][j] == 'C')
@@ -56,6 +58,8 @@ void	going_left(t_data *data, int i, int j)
 		}
 		else if (data->map[i][j - 1] == 'E' && data->score == 0)
 			finish(data);
+		else if (data->map[i][j - 1] == 'B')
+			clean_and_exit(data, 3, "");
 		else
 		{
 			if ((data->map[i][j - 1] == '0' || data->map[i][j - 1] == 'C')
@@ -84,6 +88,8 @@ void	going_dawn(t_data *data, int i, int j)
 		}
 		else if (data->map[i + 1][j] == 'E' && data->score == 0)
 			finish(data);
+		else if (data->map[i + 1][j] == 'B')
+			clean_and_exit(data, 3, "");
 		else
 		{
 			if ((data->map[i + 1][j] == '0' || data->map[i + 1][j] == 'C')
@@ -112,6 +118,8 @@ void	going_right(t_data *data, int i, int j)
 		}
 		else if (data->map[i][j + 1] == 'E' && data->score == 0)
 			finish(data);
+		else if (data->map[i][j + 1] == 'B')
+			clean_and_exit(data, 3, "");
 		else
 		{
 			if ((data->map[i][j + 1] == '0' || data->map[i][j + 1] == 'C')
@@ -142,6 +150,7 @@ void	movement(int key, t_data *data)
 				j++;
 		}
 		data->flag->flag_enter++;
+		data->flag->flag_first_move = 1;
 		if (key == 13 || key == 126)
 		{
 			data->n = 0;

@@ -24,9 +24,10 @@
 typedef struct s_flag
 {
 	int		flag_win;
-	int		flag_song;
-	int		flag_fire;
-	int		flag_start;
+	int		flag_lose;// for checking lose
+	int		flag_song;// for song change
+	int		flag_fire;// for fire
+	int		flag_start;// for start/mid/end pictures
 	int		flag_exit; // for exit loop
 	int		flag_enter; //for initial portal
 	int		flag_first_move; // for first move place
@@ -50,6 +51,8 @@ typedef struct s_img //struct for images
 	void	*imgc;
 	void	*imgc1;
 	void	*imgp;
+	void	*bh;
+	void	*losepic;
 
 	void	**imge;
 	void	**nav;
