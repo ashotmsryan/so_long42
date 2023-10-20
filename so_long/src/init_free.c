@@ -20,7 +20,6 @@ void init_all(t_data *data)
 	data->img->img1 = 0;
 	data->img->img0 = 0;
 	data->img->imgc = 0;
-	data->img->bh = 0;
 	data->img->imgc1 = 0;
 	data->img->imgp = 0;
 	data->img->imge = 0;
@@ -37,7 +36,6 @@ void init_all(t_data *data)
 	data->flag->flag_exit = 0;
 	data->flag->flag_start = 5;
 	data->flag->flag_enter = 0;
-	data->flag->flag_lose = 0;
 	data->flag->initial_x = 0;
 	data->flag->initial_y = 0;
 	data->flag->flag_first_move = 0;
@@ -61,7 +59,7 @@ void	clean_and_exit(t_data *data, int flag, char *err) // 0 if passed game | 1 i
 		write(2, err, ft_strlen(err));
 	free_double(&(data->map));
 	// system("leaks so_long");
-	if (flag && flag != 3)
+	if (flag)
 	{
 		if (data->img->endpic)
 			mlx_destroy_image(data->mlx, data->img->endpic);
@@ -84,8 +82,6 @@ void	clean_and_exit(t_data *data, int flag, char *err) // 0 if passed game | 1 i
 			mlx_destroy_image(data->mlx, data->img->img0);
 		if (data->img->imgc)
 			mlx_destroy_image(data->mlx, data->img->imgc);
-		if (data->img->bh)
-			mlx_destroy_image(data->mlx, data->img->bh);
 		if (data->img->imgc1)
 			mlx_destroy_image(data->mlx, data->img->imgc1);
 
@@ -139,31 +135,27 @@ void	clean_and_exit(t_data *data, int flag, char *err) // 0 if passed game | 1 i
 		data->flag = 0;
 		free(data->wid);
 		data->wid = 0;
-		system("killall afplay");
+		#ifdef __linux__
+			system("killall mpg123");
+		#elif defined(__APPLE__)
+			system("killall afplay");
+		#endif
 		if (flag == 1)
 			exit(1);
+		
 		exit(0);
 	}
 	mlx_destroy_window(data->mlx, data->wid);
 	data->wid = 0;
-	if (flag == 3)
-	{
-		data->flag->flag_lose = 1;
-		system("killall afplay");
-		system("afplay ./resources/ZackHemsey-TheWay.mp3 & ");
-	}
+	if (data->level + 1 == data->argc)
+		data->flag->flag_start = -2;
 	else
 	{
-		if (data->level + 1 == data->argc)
-			data->flag->flag_start = -2;
-		else
-		{
-			data->level++;
-			data->flag->flag_start = -1;
-		}
-		data->flag->flag_first_move = 0;
-		data->flag->flag_enter = 0;
-		printf("level = %d\n", data->level);
+		data->level++;
+		data->flag->flag_start = -1;
 	}
+	data->flag->flag_first_move = 0;
+	data->flag->flag_enter = 0;
+	printf("level = %d\n", data->level);
 	so_long(data, data->argv[data->level + 1]);
 }

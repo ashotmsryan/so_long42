@@ -18,14 +18,14 @@ void	del_nl(t_data *tab)
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (tab->map[i] != NULL)
 	{
+		j = 0;
 		while (tab->map[i][j])
 		{
 			if (tab->map[i][j] == '\n')
 				tab->map[i][j] = '\0';
-				j++;
+			j++;
 		}
 		i++;
 	}

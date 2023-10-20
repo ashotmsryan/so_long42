@@ -15,33 +15,26 @@
 void	player_img_upload(t_data *data)
 {
 
-	// if (data->flag->flag_enter == 0)
-	// {
-	// 	data->flag->initial_x = data->point_x;
-	// 	data->flag->initial_y = data->point_y;
-	// 	mlx_put_image_to_window(data->mlx, data->wid,
-	// 		data->img->imge[0], data->point_x, data->point_y);
-	// 	data->flag->flag_first_move = 1;
-	// }
-	 if (data->flag->flag_enter >= 0 && data->flag->flag_enter < 3)
+	if (data->flag->flag_enter == 0)
 	{
-		if (data->flag->flag_enter == 0)
-		{
-			data->flag->initial_x = data->point_x;
-			data->flag->initial_y = data->point_y;
-		}
+		data->flag->initial_x = data->point_x;
+		data->flag->initial_y = data->point_y;
+		mlx_put_image_to_window(data->mlx, data->wid,
+			data->img->imge[0], data->point_x, data->point_y);
+		data->flag->flag_first_move = 1;
+	}
+	else if (data->flag->flag_enter > 0 && data->flag->flag_enter < 3)
+	{
 		if (data->flag->flag_exit >= 4)
 			data->flag->flag_exit = 0;
-		if (data->flag->flag_first_move == 1)
-		{
+		if (data->flag->flag_first_move >= 1)
 			mlx_put_image_to_window(data->mlx, data->wid,
 				data->img->img0, data->flag->initial_x, data->flag->initial_y);
-			data->flag->flag_first_move = 0;
-		}
 		else
 			mlx_put_image_to_window(data->mlx, data->wid, 
 				data->img->imge[data->flag->flag_exit], data->flag->initial_x, data->flag->initial_y);
 		data->flag->flag_exit++;
+		data->flag->flag_first_move = 0;
 	}
 	
 	if (data->flag->flag_fire)
@@ -77,9 +70,6 @@ void	putting_img(t_data *data, int i, int j)
 	else if (data->map[i][j] == '1')
 		mlx_put_image_to_window(data->mlx, data->wid,
 			data->img->img1, data->point_x, data->point_y);
-	else if (data->map[i][j] == 'B')
-		mlx_put_image_to_window(data->mlx, data->wid,
-			data->img->bh, data->point_x, data->point_y);
 	else if (data->map[i][j] == 'C')
 	{
 		if (data->level % 2 == 0)
@@ -104,14 +94,17 @@ void	putting_img(t_data *data, int i, int j)
 
 void	start_img_put(t_data *data)
 {
-	if (data->flag->flag_lose)
-		mlx_put_image_to_window(data->mlx, data->wid, data->img->losepic, 350, 20);
-	else if (data->flag->flag_start == -2)
+	if (data->flag->flag_start == -2)
 	{
 		if (data->flag->flag_song == 1)
 		{
-			system("killall afplay");
-			system("afplay ./resources/Redbone-ComeAndGetYourLove.mp3 & ");
+			#ifdef __linux__
+				system("killall mpg123");
+				system("mpg123 ./resources/Redbone-ComeAndGetYourLove.mp3 & ");
+			#elif defined(__APPLE__)
+				system("killall afplay");
+				system("afplay ./resources/Redbone-ComeAndGetYourLove.mp3 & ");
+			#endif
 			data->flag->flag_song--;
 		}
 		mlx_put_image_to_window(data->mlx, data->wid, data->img->endpic, 0, 0);
@@ -138,14 +131,19 @@ int	image_upload(t_data *data)
 	i = 0;
 	data->point_x = 0;
 	data->point_y = 0;
-	if (data->flag->flag_start || data->flag->flag_lose)
+	if (data->flag->flag_start)
 		start_img_put(data);
 	else
 	{	
 		if (data->flag->flag_song == 2)
 		{
-			system("killall afplay");
-			system("afplay ./resources/Цой-Кукушка.mp3 & ");
+			#ifdef __linux__
+				system("killall mpg123");
+				system("mpg123 ./resources/Цой-Кукушка.mp3 & ");
+			#elif defined(__APPLE__)
+				system("killall afplay");
+				system("afplay ./resources/Цой-Кукушка.mp3 & ");
+			#endif
 			data->flag->flag_song--;
 		}
 		while (data->map && data->map[i] != NULL)

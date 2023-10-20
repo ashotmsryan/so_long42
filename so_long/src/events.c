@@ -37,11 +37,9 @@ void	fire(t_data *data)
 int	pressing_key(int key, t_data *data)
 {
     char buff[] = "|--------------------------|\n|YOU EXITED SUCCESSFULLY!!!|\n|--------------------------|\n"; 
-
-	if (key == 36 && (data->flag->flag_start || data->flag->flag_lose))
+	printf("%d\n", key);
+	if (key == ENTER && data->flag->flag_start)
 	{
-		if (data->flag->flag_lose)
-			clean_and_exit(data, 2, "You lose!\n");
 		if (data->flag->flag_start == -2 && data->level + 1 == data->argc)
 			clean_and_exit(data, 2, "You won!\n");
 		if (data->flag->flag_start == -1)
@@ -50,7 +48,11 @@ int	pressing_key(int key, t_data *data)
 		{
 			if (data->flag->flag_song == 3)
 			{
-				system("afplay ./resources/HansZimmer-CornfieldChase.mp3 & ");
+				#ifdef __linux__
+					system("mpg123 ./resources/HansZimmer-CornfieldChase.mp3 & ");
+				#elif defined(__APPLE__)
+					system("afplay ./resources/HansZimmer-CornfieldChase.mp3 & ");
+				#endif
 				data->flag->flag_song--;
 			}
 			data->flag->flag_start--;
@@ -64,12 +66,12 @@ int	pressing_key(int key, t_data *data)
 		}
 		mlx_clear_window(data->mlx, data->wid);
 	}
-	if (key == 53)
+	if (key == ESC)
 		clean_and_exit(data, 2, buff);
-	else if (key == 13 || key == 1 || key == 0 || key == 2
-		|| key == 126 || key == 125 || key == 123 || key == 124)
+	else if (key == UP || key == UP1 || key == DOWN || key == DOWN1
+		|| key == LEFT || key == LEFT1 || key == RIGHT || key == RIGHT1)
 		movement(key, data);
-	else if (key == 49)
+	else if (key == SPACE)
 		fire(data);
 	return (0);
 }
@@ -84,6 +86,6 @@ int	exit_game(t_data *data)
 void	key_event(t_data *data)
 {
 	mlx_loop_hook(data->mlx, image_upload, data);
-	mlx_hook (data->wid, 2, 1l << 2, pressing_key, data);
+	mlx_hook (data->wid, 2, 1l << 0, pressing_key, data);
 	mlx_hook (data->wid, 17, 1l << 17, exit_game, data);
 }

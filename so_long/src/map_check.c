@@ -53,7 +53,7 @@ void	check_strange_symbole(t_data *data)
 		while (data->map[j][i] != '\0')
 		{	
 			if (data->map[j][i] != '1' && data->map[j][i] != '0'
-					&& data->map[j][i] != 'P' && data->map[j][i] != 'B'
+					&& data->map[j][i] != 'P' && data->map[j][i] != 'A'
 					&& data->map[j][i] != 'E' && data->map[j][i] != 'C'
 					&& data->map[j][i] != '\0')
 				clean_and_exit(data, 1, "Strange symbole error\n");
@@ -77,7 +77,7 @@ void	check_borders(t_data *data)
 		j = 0;
 		while(data->map[i][j])
 		{
-			if ((data->map[i][j] == '0' || data->map[i][j] == 'P' || data->map[i][j] == 'B'
+			if ((data->map[i][j] == '0' || data->map[i][j] == 'P' || data->map[i][j] == 'A'
 				|| data->map[i][j] == 'C' || data->map[i][j] == 'E') && (i == 0 || i == hight - 1
 				|| j == (int)ft_strlen(data->map[i]) - 1 || j == 0))
 				clean_and_exit(data, 1, "Invalid map\n");
