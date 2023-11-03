@@ -98,13 +98,16 @@ void	start_img_put(t_data *data)
 	{
 		if (data->flag->flag_song == 1)
 		{
-			#ifdef __linux__
+			if (data->os)
+            {
 				system("killall mpg123");
 				system("mpg123 ./resources/Redbone-ComeAndGetYourLove.mp3 & ");
-			#elif defined(__APPLE__)
-				system("killall afplay");
+            }
+            else
+			{
+            	system("killall afplay");
 				system("afplay ./resources/Redbone-ComeAndGetYourLove.mp3 & ");
-			#endif
+            }
 			data->flag->flag_song--;
 		}
 		mlx_put_image_to_window(data->mlx, data->wid, data->img->endpic, 0, 0);
@@ -114,13 +117,13 @@ void	start_img_put(t_data *data)
 	else if (data->flag->flag_start == 5)
 		mlx_put_image_to_window(data->mlx, data->wid, data->img->start, 0, 0);
 	else if(data->flag->flag_start == 4)
-		mlx_put_image_to_window(data->mlx, data->wid, data->img->start1, 240, 100);
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->start1, 0, 95);
 	else if (data->flag->flag_start == 3)
-		mlx_put_image_to_window(data->mlx, data->wid, data->img->start2, 240, 100);
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->start2, 0, 95);
 	else if (data->flag->flag_start == 2)
-		mlx_put_image_to_window(data->mlx, data->wid, data->img->start3, 240, 100);
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->start3, 0, 95);
 	else if (data->flag->flag_start == 1)
-		mlx_put_image_to_window(data->mlx, data->wid, data->img->start4, 400, 50);
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->start4, 110, 25);
 }
 
 int	image_upload(t_data *data)
@@ -137,13 +140,16 @@ int	image_upload(t_data *data)
 	{	
 		if (data->flag->flag_song == 2)
 		{
-			#ifdef __linux__
-				system("killall mpg123");
+			if (data->os)
+			{
+                system("killall mpg123");
 				system("mpg123 ./resources/Цой-Кукушка.mp3 & ");
-			#elif defined(__APPLE__)
+            }
+            else
+            {
 				system("killall afplay");
 				system("afplay ./resources/Цой-Кукушка.mp3 & ");
-			#endif
+            }
 			data->flag->flag_song--;
 		}
 		while (data->map && data->map[i] != NULL)

@@ -135,11 +135,10 @@ void	clean_and_exit(t_data *data, int flag, char *err) // 0 if passed game | 1 i
 		data->flag = 0;
 		free(data->wid);
 		data->wid = 0;
-		#ifdef __linux__
+		if (data->os)
 			system("killall mpg123");
-		#elif defined(__APPLE__)
+		else
 			system("killall afplay");
-		#endif
 		if (flag == 1)
 			exit(1);
 		

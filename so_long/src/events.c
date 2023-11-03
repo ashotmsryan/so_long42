@@ -48,11 +48,10 @@ int	pressing_key(int key, t_data *data)
 		{
 			if (data->flag->flag_song == 3)
 			{
-				#ifdef __linux__
+				if (data->os)
 					system("mpg123 ./resources/HansZimmer-CornfieldChase.mp3 & ");
-				#elif defined(__APPLE__)
+                else
 					system("afplay ./resources/HansZimmer-CornfieldChase.mp3 & ");
-				#endif
 				data->flag->flag_song--;
 			}
 			data->flag->flag_start--;

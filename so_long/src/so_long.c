@@ -21,8 +21,8 @@ void	window_manage(int len, int hight, t_data *data)
 	}
 	else
 	{
-		data->win_x = 2000;
-		data->win_y = 1000;
+		data->win_x = 1440;
+		data->win_y = 900;
 	}
 	if (!data->wid)
 		data->wid = mlx_new_window(data->mlx, data->win_x, data->win_y, "so_long");
@@ -88,6 +88,11 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
+    #ifdef __linux__
+        data.os = 1;
+    #elif defined(__APPLE__)
+        data.os = 0;
+		#endif
 	data.argc = argc - 1;
 	data.argv = argv;
 	init_all(&data);

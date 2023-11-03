@@ -63,6 +63,7 @@ typedef struct s_img //struct for images
 
 typedef struct s_data //struct for general variabls 
 {
+    int     os;
 	char	*buff;
 	char	**map;
 	void	*mlx;
