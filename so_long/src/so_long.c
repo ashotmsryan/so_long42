@@ -26,7 +26,7 @@ void	window_manage(int len, int hight, t_data *data)
 	}
 	if (!data->wid)
 		data->wid = mlx_new_window(data->mlx, data->win_x, data->win_y, "so_long");
-	image_upload(data);
+    image_upload(data);
 	key_event(data);
 	mlx_loop(data->mlx);
 }

@@ -37,7 +37,6 @@ void	fire(t_data *data)
 int	pressing_key(int key, t_data *data)
 {
     char buff[] = "|--------------------------|\n|YOU EXITED SUCCESSFULLY!!!|\n|--------------------------|\n"; 
-	printf("%d\n", key);
 	if (key == ENTER && data->flag->flag_start)
 	{
 		if (data->flag->flag_start == -2 && data->level + 1 == data->argc)
@@ -49,9 +48,9 @@ int	pressing_key(int key, t_data *data)
 			if (data->flag->flag_song == 3)
 			{
 				if (data->os)
-					system("mpg123 ./resources/HansZimmer-CornfieldChase.mp3 & ");
+					system("mpg123 ./resources/first.mp3 & ");
                 else
-					system("afplay ./resources/HansZimmer-CornfieldChase.mp3 & ");
+					system("afplay ./resources/first.mp3 & ");
 				data->flag->flag_song--;
 			}
 			data->flag->flag_start--;

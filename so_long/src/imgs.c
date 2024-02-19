@@ -91,7 +91,7 @@ void	get_img(t_data *data)
         || !data->img->nav_m[0] || !data->img->nav_m[1] || !data->img->nav_m[2] || !data->img->nav_m[3]
         || !data->img->imge[0] || !data->img->imge[1] || !data->img->imge[2] || !data->img->imge[3]
         || !data->img->nav_f[0] || !data->img->nav_f[1] || !data->img->nav_f[2] || !data->img->nav_f[3]
-		|| !data->img->img1 || !data->img->img0 || !data->img->imgc || !data->img->imge || !data->img->midpic || !data->img->endpic
+		|| !data->img->img1 || !data->img->img0 || !data->img->imgc || !data->img->midpic || !data->img->endpic
 		|| !data->img->start || !data->img->start1 || !data->img->start2 || !data->img->start3 || !data->img->start4)
 		clean_and_exit(data, 1, "Resource error\n");
 }

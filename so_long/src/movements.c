@@ -142,28 +142,28 @@ void	movement(int key, t_data *data)
 				j++;
 		}
 		data->flag->flag_enter++;
-		if (key == 13 || key == 126)
+		if (key == UP || key == UP1)
 		{
 			data->n = 0;
-			if (key == 13)
+			if (key == UP1)
 				going_up(data, i, j);
 		}
-		else if (key == 0 || key == 123)
+		else if (key == LEFT || key == LEFT1)
 		{
 			data->n = 1;
-			if (key == 0)
+			if (key == LEFT1)
 				going_left(data, i, j);
 		}
-		else if (key == 1 || key == 125)
+		else if (key == DOWN || key == DOWN1)
 		{
 			data->n = 2;
-			if (key == 1)
+			if (key == DOWN1)
 				going_dawn(data, i, j);
 		}
-		else if (key == 2 || key == 124)
+		else if (key == RIGHT || key == RIGHT1)
 		{
 			data->n = 3;
-			if (key == 2)
+			if (key == RIGHT1)
 				going_right(data, i, j);
 		}
 	}

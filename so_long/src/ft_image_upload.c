@@ -14,7 +14,6 @@
 
 void	player_img_upload(t_data *data)
 {
-
 	if (data->flag->flag_enter == 0)
 	{
 		data->flag->initial_x = data->point_x;
@@ -39,7 +38,7 @@ void	player_img_upload(t_data *data)
 	
 	if (data->flag->flag_fire)
 	{
-		usleep(300000);
+		usleep(300);
 		data->flag->flag_fire = 0;
 	}
 	if (data->n >= 0 && data->n < 4)
@@ -61,8 +60,8 @@ void	putting_img(t_data *data, int i, int j)
 {
 	if (data->flag->flag_enter > 2)
 		data->flag->initial_x = data->flag->initial_y = 0;
-	
-	if (data->map[i][j] != '1' && !(data->flag->initial_x == data->point_x && data->flag->initial_y == data->point_y))
+	if (data->map[i][j] != '1' && !(data->flag->initial_x == data->point_x 
+        && data->flag->initial_y == data->point_y))
 		mlx_put_image_to_window(data->mlx, data->wid,
 			data->img->img0, data->point_x, data->point_y);
 	if (data->map[i][j] == 'F' || data->map[i][j] == 'P')
@@ -101,12 +100,12 @@ void	start_img_put(t_data *data)
 			if (data->os)
             {
 				system("killall mpg123");
-				system("mpg123 ./resources/Redbone-ComeAndGetYourLove.mp3 & ");
+				system("mpg123 ./resources/third.mp3 & ");
             }
             else
 			{
             	system("killall afplay");
-				system("afplay ./resources/Redbone-ComeAndGetYourLove.mp3 & ");
+				system("afplay ./resources/third.mp3 & ");
             }
 			data->flag->flag_song--;
 		}
@@ -143,12 +142,12 @@ int	image_upload(t_data *data)
 			if (data->os)
 			{
                 system("killall mpg123");
-				system("mpg123 ./resources/Цой-Кукушка.mp3 & ");
+				system("mpg123 ./resources/second.mp3 & ");
             }
             else
             {
 				system("killall afplay");
-				system("afplay ./resources/Цой-Кукушка.mp3 & ");
+				system("afplay ./resources/second.mp3 & ");
             }
 			data->flag->flag_song--;
 		}
