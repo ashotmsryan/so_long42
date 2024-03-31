@@ -7,7 +7,7 @@ NAME = so_long
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -ImlxLib # -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-ImlxLib  -g3 -fsanitize=address
 
 SRCS = $(wildcard src/*.c)
 
@@ -19,7 +19,7 @@ OBJS = $(patsubst src/%.c, $(OBJFILE)/%.o, $(SRCS))
 
 RM = rm -rf
 
-FMS = -lmlx -framework OpenGL -framework AppKit
+FMS = -lmlx -framework OpenGL -framework AppKit 
 
 MD = mkdir -p
 
@@ -34,7 +34,7 @@ $(OBJFILE) :
 	@$(MD) $(OBJFILE)
 
 $(OBJFILE)/%.o : src/%.c Makefile so_long.h keys.h
-	@$(CC) -s $(CFLAGS) -c $< -o $@
+	@$(CC) -s $(CFLAGS) -I$(MLX) -c $< -o $@
 
 $(NAME): $(OBJS) Makefile
 	@$(CC) -s $(OBJS) $(CFLAGS) -L$(MLX) $(FMS) -o $(NAME)
