@@ -66,6 +66,9 @@ void	putting_img(t_data *data, int i, int j)
 			data->img->img0, data->point_x, data->point_y);
 	if (data->map[i][j] == 'F' || data->map[i][j] == 'P')
 		player_img_upload(data);
+	else if (data->map[i][j] == 'Y')
+		mlx_put_image_to_window(data->mlx, data->wid,
+			data->img->die, data->point_x, data->point_y);
 	else if (data->map[i][j] == '1')
 		mlx_put_image_to_window(data->mlx, data->wid,
 			data->img->img1, data->point_x, data->point_y);
@@ -93,7 +96,7 @@ void	putting_img(t_data *data, int i, int j)
 
 void	start_img_put(t_data *data)
 {
-	if (data->flag->flag_start == -2)
+	if (data->flag->flag_start == -3)
 	{
 		if (data->flag->flag_song == 1)
 		{
@@ -111,7 +114,9 @@ void	start_img_put(t_data *data)
 		}
 		mlx_put_image_to_window(data->mlx, data->wid, data->img->endpic, 0, 0);
 	}
-	else if (data->flag->flag_start == -1)
+	else if (data->flag->flag_start == -2)
+		mlx_put_image_to_window(data->mlx, data->wid, data->img->losepic, 75, 0);
+    else if (data->flag->flag_start == -1)
 		mlx_put_image_to_window(data->mlx, data->wid, data->img->midpic, 0, 0);
 	else if (data->flag->flag_start == 5)
 		mlx_put_image_to_window(data->mlx, data->wid, data->img->start, 0, 0);

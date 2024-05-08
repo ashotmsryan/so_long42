@@ -39,7 +39,9 @@ int	pressing_key(int key, t_data *data)
     char buff[] = "|--------------------------|\n|YOU EXITED SUCCESSFULLY!!!|\n|--------------------------|\n"; 
 	if (key == ENTER && data->flag->flag_start)
 	{
-		if (data->flag->flag_start == -2 && data->level + 1 == data->argc)
+        if (data->flag->flag_die)
+			clean_and_exit(data, 2, "You lost!\n");
+		if (data->flag->flag_start == -3 && data->level + 1 == data->argc)
 			clean_and_exit(data, 2, "You won!\n");
 		if (data->flag->flag_start == -1)
 			data->flag->flag_start = 0;

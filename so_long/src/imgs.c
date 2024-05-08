@@ -22,9 +22,13 @@ void	get_img(t_data *data)
 		&data->img->img_w, &data->img->img_l);
 	data->img->imgc1 = mlx_xpm_file_to_image(data->mlx, "resources/c1.xpm", \
 		&data->img->img_w, &data->img->img_l);
-	data->img->midpic = mlx_xpm_file_to_image(data->mlx, "resources/midpic.xpm", \
+	data->img->die = mlx_xpm_file_to_image(data->mlx, "resources/die.xpm", \
+		&data->img->img_w, &data->img->img_l);
+    data->img->midpic = mlx_xpm_file_to_image(data->mlx, "resources/midpic.xpm", \
 		&data->img->img_w, &data->img->img_l);
 	data->img->endpic = mlx_xpm_file_to_image(data->mlx, "resources/endpic.xpm", \
+		&data->img->img_w, &data->img->img_l);
+    data->img->losepic = mlx_xpm_file_to_image(data->mlx, "resources/losepic.xpm", \
 		&data->img->img_w, &data->img->img_l);
 
 	data->img->start = mlx_xpm_file_to_image(data->mlx, "resources/start.xpm", \
@@ -89,9 +93,9 @@ void	get_img(t_data *data)
 
     if (!data->img->nav[0] || !data->img->nav[1] || !data->img->nav[2] || !data->img->nav[3]
         || !data->img->nav_m[0] || !data->img->nav_m[1] || !data->img->nav_m[2] || !data->img->nav_m[3]
-        || !data->img->imge[0] || !data->img->imge[1] || !data->img->imge[2] || !data->img->imge[3]
+        || !data->img->die || !data->img->imge[0] || !data->img->imge[1] || !data->img->imge[2] || !data->img->imge[3]
         || !data->img->nav_f[0] || !data->img->nav_f[1] || !data->img->nav_f[2] || !data->img->nav_f[3]
-		|| !data->img->img1 || !data->img->img0 || !data->img->imgc || !data->img->midpic || !data->img->endpic
+		|| !data->img->img1 || !data->img->img0 || !data->img->imgc || !data->img->losepic || !data->img->midpic || !data->img->endpic
 		|| !data->img->start || !data->img->start1 || !data->img->start2 || !data->img->start3 || !data->img->start4)
 		clean_and_exit(data, 1, "Resource error\n");
 }

@@ -17,13 +17,15 @@ void init_all(t_data *data)
 	data->img->nav = 0;
 	data->img->nav_m = 0;
 	data->img->nav_f = 0;
-	data->img->img1 = 0;
+    data->img->die = 0;
+    data->img->img1 = 0;
 	data->img->img0 = 0;
 	data->img->imgc = 0;
 	data->img->imgc1 = 0;
 	data->img->imgp = 0;
 	data->img->imge = 0;
 	data->img->endpic = 0;
+	data->img->losepic = 0;
 	data->img->midpic = 0;
 	data->img->img_l = 0;
 	data->img->img_w = 0;
@@ -31,6 +33,7 @@ void init_all(t_data *data)
 	if (!data->flag)
 		clean_and_exit(data, 1, "Fatal error\n");
 	data->flag->flag_win = 0;
+	data->flag->flag_die = 0;
 	data->flag->flag_song = 3;
 	data->flag->flag_fire = 0;
 	data->flag->flag_exit = 0;
@@ -61,6 +64,8 @@ void	clean_and_exit(t_data *data, int flag, char *err) // 0 if passed game | 1 i
 	// system("leaks so_long");
 	if (flag)
 	{
+        if (data->img->losepic)
+			mlx_destroy_image(data->mlx, data->img->losepic);
 		if (data->img->endpic)
 			mlx_destroy_image(data->mlx, data->img->endpic);
 		if (data->img->midpic)
@@ -76,6 +81,8 @@ void	clean_and_exit(t_data *data, int flag, char *err) // 0 if passed game | 1 i
 		if (data->img->start4)
 			mlx_destroy_image(data->mlx, data->img->start4);
 
+		if (data->img->die)
+			mlx_destroy_image(data->mlx, data->img->die);
 		if (data->img->img1)
 			mlx_destroy_image(data->mlx, data->img->img1);
 		if (data->img->img0)
@@ -146,9 +153,11 @@ void	clean_and_exit(t_data *data, int flag, char *err) // 0 if passed game | 1 i
 	}
 	mlx_destroy_window(data->mlx, data->wid);
 	data->wid = 0;
-	if (data->level + 1 == data->argc)
+	if (data->flag->flag_die)
 		data->flag->flag_start = -2;
-	else
+	else if (data->level + 1 == data->argc)
+		data->flag->flag_start = -3;
+    else
 	{
 		data->level++;
 		data->flag->flag_start = -1;

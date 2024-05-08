@@ -25,6 +25,7 @@
 typedef struct s_flag
 {
 	int		flag_win;
+	int		flag_die;
 	int		flag_song;
 	int		flag_fire;
 	int		flag_start;
@@ -44,6 +45,7 @@ typedef struct s_img //struct for images
 	void	*start3;
 	void	*start4;
 	void	*midpic;
+	void	*losepic;
 	void	*endpic;
 
 	void	*img1;
@@ -51,6 +53,7 @@ typedef struct s_img //struct for images
 	void	*imgc;
 	void	*imgc1;
 	void	*imgp;
+	void	*die;
 
 	void	**imge;
 	void	**nav;
